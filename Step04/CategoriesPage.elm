@@ -3,6 +3,7 @@ module Step04.CategoriesPage exposing (categories, main)
 import Html exposing (Html, a, span, strong, text)
 import Html.Attributes exposing (href)
 
+type alias Category = {id: Int, name: String}
 
 categories : List Category
 categories =
