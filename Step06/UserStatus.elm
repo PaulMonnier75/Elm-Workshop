@@ -18,7 +18,7 @@ main =
 It should contain three values: NotSpecified, UnderAge and Adult.
 -}
 type UserStatus
-    = ModifyThisType
+    = Undefined | Underage | Overage
 
 
 {-| Don't modify this union type, it already contains the only message we need.
@@ -30,8 +30,7 @@ type Msg
 {-| Once the type UserStatus is fixed, you'll be able to initialize properly the model here.
 -}
 initialModel : UserStatus
-initialModel =
-    ModifyThisType
+initialModel = Undefined
 
 
 {-| Don't modify this function, it displays everything you need and also displays the tests.
@@ -58,7 +57,7 @@ userStatusForm =
             [ id "underage"
             , name "status"
             , type_ "radio"
-            , onClick (UserStatusSelected ModifyThisType)
+            , onClick (UserStatusSelected Underage)
             ]
             [ text "I'm underage" ]
         , label [ class "mr-3", for "underage" ] [ text "I'm underage" ]
@@ -66,7 +65,7 @@ userStatusForm =
             [ id "adult"
             , name "status"
             , type_ "radio"
-            , onClick (UserStatusSelected ModifyThisType)
+            , onClick (UserStatusSelected Overage)
             ]
             [ text "I'm an adult!" ]
         , label [ for "adult" ] [ text "I'm an adult" ]
@@ -78,8 +77,14 @@ userStatusForm =
 statusMessage : UserStatus -> Html Msg
 statusMessage userStatus =
     case userStatus of
-        ModifyThisType ->
-            text "Personalize the message according to the user status"
+        Underage ->
+            text "You are underage"
+        Overage -> 
+            text "You are an adult"
+        Undefined ->
+            text ""
+
+        
 
 
 {-| Update the model according to the message received
@@ -88,7 +93,7 @@ update : Msg -> UserStatus -> UserStatus
 update message userStatus =
     case message of
         UserStatusSelected newUserStatus ->
-            userStatus
+            newUserStatus
 
 
 

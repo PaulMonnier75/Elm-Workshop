@@ -12,7 +12,6 @@ import Test.Html.Selector exposing (attribute, text)
 import Test.Runner.Html exposing (defaultConfig, hidePassedTests, viewResults)
 import Utils.Utils exposing (testStyles)
 
-
 main : Html a
 main =
     div []
